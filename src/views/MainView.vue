@@ -3,7 +3,7 @@ import { ref, getCurrentInstance, onMounted, reactive } from "vue";
 import ElementCard from "../components/ElementCard.vue";
 import FuncButton from "../components/FuncButton.vue";
 import NumberInput from "../components/NumberInput.vue";
-import InteractiveDialog from "../components/InteractiveDialog.vue";
+import DefaultDialog from "../components/DefaultDialog.vue";
 
 import images from "../assets/printe-elems/custom-elements-image";
 import {
@@ -21,8 +21,9 @@ console.log(proxy);
 // 数据
 let hpt = reactive({});
 let printData = reactive({});
-const batchNum = ref(1);
-const scale = ref(100);
+let html = ref("");
+let batchNum = ref(1);
+let scale = ref(100);
 
 // 按钮列表
 const btnList = ref([
@@ -55,7 +56,8 @@ const btnList = ref([
         type: "success",
         icon: "fa-regular fa-eye",
         click: function () {
-            previewDialog.value.showDialog("预览");
+            html.value = proxy.$getPrintHTMLStr(hpt, printData);
+            previewDialog.value.showDialog();
         },
     },
     {
@@ -65,7 +67,7 @@ const btnList = ref([
         click: function () {
             AlertDialog({
                 title: "清空提醒",
-                message: "确定要清空画布吗？",
+                message: "确定要<span style='color:red'>清空</span>画布吗？",
                 confirmText: "确定",
                 cancelText: "取消",
                 onConfirm: () => {
@@ -91,7 +93,6 @@ const btnList = ref([
 ]);
 
 const previewDialog = ref(null);
-const alertDialog = ref(null);
 
 // 函数
 onMounted(() => {
@@ -166,12 +167,10 @@ function init() {
             </div>
         </div>
 
-        <InteractiveDialog ref="previewDialog"
-                           @confirm="console.log('nihao')">
-        </InteractiveDialog>
-
-        <InteractiveDialog ref="alertDialog">
-        </InteractiveDialog>
+        <DefaultDialog ref="previewDialog">
+            <div id="previewHtml"
+                 v-html="html"></div>
+        </DefaultDialog>
     </div>
 </template>
 
