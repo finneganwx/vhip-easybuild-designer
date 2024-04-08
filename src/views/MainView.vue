@@ -4,6 +4,8 @@ import ElementCard from "../components/ElementCard.vue";
 import FuncButton from "../components/FuncButton.vue";
 import NumberInput from "../components/NumberInput.vue";
 
+import imageElements from "../assets/printe-elems/imageElements";
+
 // 系统代理
 const proxy = getCurrentInstance().appContext.config.globalProperties;
 console.log(proxy);
@@ -85,7 +87,7 @@ const elemsList = ref([
         icon: "fa-solid fa-image",
         iconColor: "#FECACA",
         iconBgColor: "#FF7281",
-        image: "/src/assets/images/image.png",
+        image: "/src/assets/images/img.png",
     },
     {
         tid: "defaultModule.longText",
@@ -175,7 +177,10 @@ onMounted(() => {
 });
 
 function init() {
-    proxy.$initProviders(undefined);
+    const group = proxy.$createElemsGroup("我的图片", imageElements);
+    const provider = proxy.$createProvider("myImageProvider", group);
+    proxy.$initProviders(provider);
+    proxy.$buildElemsByUlist("myImageProvider", "#my-elements-box");
     proxy.$buildElemsByHtml();
     hpt = proxy.$createCoreObj({ settingContainer: "#setting-box" });
     proxy.$design(hpt, "#canvas-box");
@@ -209,6 +214,8 @@ function init() {
                                  :iconColor="el.iconColor"
                                  :iconBgColor="el.iconBgColor"
                                  :image="el.image"></ElementCard>
+
+                    <div id="my-elements-box"></div>
                 </div>
             </div>
             <div class="col-span-6">
