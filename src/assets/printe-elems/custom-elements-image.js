@@ -5,7 +5,9 @@ const images = [
         "title": '我的签名',
         "type": 'image',
         "options": {
-            "src": "https://img-prod-cms-rt-microsoft-com.akamaized.net/cms/api/am/imageFileData/RE4wB7s?ver=ef49",
+            "height": 30,
+            "width": 90,
+            "src": "https://img.zcool.cn/community/0152475deefc90a80121385366d362.jpg@2o.jpg",
         }
     }
 ]

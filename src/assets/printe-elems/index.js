@@ -107,7 +107,7 @@ const customElements = [
         icon: "fa-solid fa-signature",
         iconColor: "#83CBFF",
         iconBgColor: "#E7F4FF",
-        image: "/src/assets/images/text.png",
+        image: "/src/assets/images/signature.png",
     }
 ]
 

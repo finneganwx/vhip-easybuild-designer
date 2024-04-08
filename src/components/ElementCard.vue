@@ -48,7 +48,7 @@ const thumb = ref(true);
         </div>
         <Transition>
             <div v-if="!thumb">
-                <div class="ml-2 my-2 text-sm font-semibold">{{ title }}</div>
+                <div class="ml-2 mt-1 text-sm font-semibold">{{ title }}</div>
                 <img :src='image'
                      style="object-fit: contain;"
                      class="w-36">
