@@ -35,22 +35,22 @@ defineExpose({
 
 <template>
     <dialog ref="dialog"
-            class=" rounded p-2 overflow-hidden "
+            class="rounded overflow-hidden box-content p-4"
             :style="{ width: width }">
-        <div class="flex justify-start items-center py-1">
+        <div class="flex justify-start items-center pb-2">
             <div class=" font-semibold font-sans">{{ title }}</div>
             <font-awesome-icon v-if="showClose"
                                :icon="['fas', 'xmark']"
                                class="px-1 py-0.5 ml-auto hover:text-red-600"
                                @click="closeDialog" />
         </div>
-        <div class="max-h-[80vh] overflow-y-auto overflow-x-hidden">
+        <div class="max-h-[80vh] overflow-y-auto">
             <slot>
                 <div>Dialog Content</div>
             </slot>
         </div>
 
-        <div class="py-1">
+        <div>
             <slot name="footer">
             </slot>
         </div>
