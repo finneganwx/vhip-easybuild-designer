@@ -5,6 +5,7 @@ import FuncButton from "../components/FuncButton.vue";
 import CompButton from "../components/CompButton.vue";
 import ButtonGroup from "../components/ButtonGroup.vue";
 import NumberInput from "../components/NumberInput.vue";
+import PopupSelect from "../components/PopupSelect.vue";
 import DefaultDialog from "../components/DefaultDialog.vue";
 import AlertDialog from "../components/alert/AlertDialog";
 
@@ -19,16 +20,26 @@ import {
 const proxy = getCurrentInstance().appContext.config.globalProperties;
 console.log(proxy);
 
-// 数据
+// 打印
 let hpt = reactive({});
 let printData = reactive({});
 let html = ref("");
 let batchNum = ref(1);
 let scale = ref(100);
+let paperType = ref("A4");
 
+// 渲染
 const scaleStr = computed(() => {
     return scale.value + "%";
 });
+const paperTypes = ref([
+    { label: "A1", value: "A1" },
+    { label: "A2", value: "A2" },
+    { label: "A3", value: "A3" },
+    { label: "A4", value: "A4" },
+]);
+const previewDialog = ref();
+const jsonDialog = ref();
 
 // 按钮列表
 const btnList = ref([
@@ -92,8 +103,6 @@ const btnList = ref([
             proxy.$rotatePaper(hpt);
         },
     },
-    { text: "选择纸张" },
-    { text: "设置尺寸" },
 ]);
 const btnGroup = ref([
     {
@@ -124,8 +133,29 @@ const btnGroup = ref([
         },
     },
 ]);
-
-const previewDialog = ref(null);
+const moreBtns = ref([
+    {
+        text: "模板JSON",
+        icon: "fa-solid fa-file-code",
+        click: function () {
+            jsonDialog.value.showDialog();
+        },
+    },
+    {
+        text: "数据填充",
+        icon: "fa-solid fa-database",
+        click: function () {
+            jsonDialog.value.showDialog();
+        },
+    },
+    {
+        text: "自定义元素提取",
+        icon: "fa-solid fa-bolt",
+        click: function () {
+            jsonDialog.value.showDialog();
+        },
+    },
+]);
 
 // 函数
 onMounted(() => {
@@ -139,6 +169,11 @@ function init() {
     proxy.$buildElemsByHtml();
     hpt = proxy.$createCoreObj({ settingContainer: "#setting-box" });
     proxy.$design(hpt, "#canvas-box");
+}
+
+function onPaperTypeChange(paperType) {
+    console.log(paperType);
+    proxy.$setPaperType(hpt, paperType.value);
 }
 </script>
 
@@ -156,6 +191,10 @@ function init() {
                         :type="btn.type"
                         @click="btn.click"></FuncButton>
             <ButtonGroup :btns="btnGroup"></ButtonGroup>
+            <PopupSelect v-model="paperType"
+                         :options="paperTypes"
+                         @change="onPaperTypeChange"></PopupSelect>
+            <ButtonGroup :btns="moreBtns"></ButtonGroup>
         </div>
 
         <div class="grid grid-cols-12 mt-2 gap-2">
@@ -193,7 +232,7 @@ function init() {
             <div class="col-span-8">
                 <div id="canvas-box"
                      @click="open = true"
-                     class="p-4 rounded shadow-inner"></div>
+                     class="p-4 rounded shadow-inner overflow-x-auto"></div>
             </div>
             <div class="col-span-2 border border-sky-500 rounded h-fit">
                 <div class="mx-2 my-2 font-semibold text-xl">设置面板</div>
@@ -201,9 +240,14 @@ function init() {
             </div>
         </div>
 
+        <!-- 预览 -->
         <DefaultDialog ref="previewDialog">
             <div id="previewHtml"
                  v-html="html"></div>
+        </DefaultDialog>
+
+        <!-- 模板json弹窗 -->
+        <DefaultDialog ref="jsonDialog">
         </DefaultDialog>
     </div>
 </template>

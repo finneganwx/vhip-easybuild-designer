@@ -1,6 +1,5 @@
 <script setup>
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
-import "../assets/fontawesome";
 
 import { ref, defineProps } from "vue";
 
