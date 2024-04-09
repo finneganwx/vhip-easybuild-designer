@@ -18,7 +18,6 @@ const props = defineProps({
 });
 
 const dialog = ref();
-
 const showDialog = () => {
     dialog.value.showModal();
 };
@@ -57,4 +56,5 @@ defineExpose({
     </dialog>
 </template>
 
-<style scoped></style>
+<style scoped>
+</style>

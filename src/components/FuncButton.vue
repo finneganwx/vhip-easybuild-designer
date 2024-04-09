@@ -53,7 +53,7 @@ const getColor = computed(() => {
 <template>
     <div>
         <button @click="handleClick"
-                class="rounded-md px-2 py-2 text-[13px]"
+                class="rounded-md p-2 text-[13px]"
                 :class="getColor">
             <font-awesome-icon v-if="icon"
                                :icon="icon"

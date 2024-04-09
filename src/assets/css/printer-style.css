@@ -1,0 +1,16 @@
+/* 提交按钮 */
+#setting-box:deep(.hiprint-option-item-submitBtn) {
+    background-color: rebeccapurple;
+    border-radius: 1rem;
+}
+
+/* 删除按钮 */
+#setting-box:deep(.hiprint-option-item-deleteBtn) {
+    background-color: red;
+    border-radius: 1rem;
+}
+
+/* 字体颜色选择 */
+#setting-box:deep(.minicolors-input) {
+    width: 13rem !important;
+}

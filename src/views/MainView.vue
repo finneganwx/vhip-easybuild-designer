@@ -1,18 +1,19 @@
 <script setup>
-import { ref, getCurrentInstance, onMounted, reactive } from "vue";
+import { ref, getCurrentInstance, onMounted, reactive, computed } from "vue";
 import ElementCard from "../components/ElementCard.vue";
 import FuncButton from "../components/FuncButton.vue";
+import CompButton from "../components/CompButton.vue";
+import ButtonGroup from "../components/ButtonGroup.vue";
 import NumberInput from "../components/NumberInput.vue";
 import DefaultDialog from "../components/DefaultDialog.vue";
+import AlertDialog from "../components/alert/AlertDialog";
 
-import images from "../assets/printe-elems/custom-elements-image";
+import images from "../assets/js/custom-elements-image";
 import {
     defaultMainElements,
     defaultAsstElements,
     customElements,
-} from "../assets/printe-elems/index";
-
-import AlertDialog from "../components/alert/AlertDialog";
+} from "../assets/js/index";
 
 // 系统代理
 const proxy = getCurrentInstance().appContext.config.globalProperties;
@@ -24,6 +25,10 @@ let printData = reactive({});
 let html = ref("");
 let batchNum = ref(1);
 let scale = ref(100);
+
+const scaleStr = computed(() => {
+    return scale.value + "%";
+});
 
 // 按钮列表
 const btnList = ref([
@@ -87,9 +92,37 @@ const btnList = ref([
             proxy.$rotatePaper(hpt);
         },
     },
-    { text: "放大/缩小" },
     { text: "选择纸张" },
     { text: "设置尺寸" },
+]);
+const btnGroup = ref([
+    {
+        icon: "fa-solid fa-minus",
+        click: () => {
+            if (scale.value < 10) {
+                return;
+            }
+            scale.value -= 10;
+            proxy.$scaleContent(hpt, scale.value / 100);
+        },
+    },
+    {
+        text: scaleStr,
+        dbclick: () => {
+            scale.value = 100;
+            proxy.$scaleContent(hpt, scale.value / 100);
+        },
+    },
+    {
+        icon: "fa-solid fa-plus",
+        click: () => {
+            if (scale.value > 140) {
+                return;
+            }
+            scale.value += 10;
+            proxy.$scaleContent(hpt, scale.value / 100);
+        },
+    },
 ]);
 
 const previewDialog = ref(null);
@@ -122,6 +155,7 @@ function init() {
                         :icon="btn.icon"
                         :type="btn.type"
                         @click="btn.click"></FuncButton>
+            <ButtonGroup :btns="btnGroup"></ButtonGroup>
         </div>
 
         <div class="grid grid-cols-12 mt-2 gap-2">
@@ -174,5 +208,6 @@ function init() {
     </div>
 </template>
 
+<style src="../assets/css/printer-style.css" scoped></style>
 <style scoped>
 </style>

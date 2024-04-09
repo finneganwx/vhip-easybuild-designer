@@ -105,8 +105,8 @@ const customElements = [
         tid: "custom.mySign",
         title: "我的签名",
         icon: "fa-solid fa-signature",
-        iconColor: "#83CBFF",
-        iconBgColor: "#E7F4FF",
+        iconColor: "#FFB02E",
+        iconBgColor: "#FFE55F",
         image: "/src/assets/images/signature.png",
     }
 ]
