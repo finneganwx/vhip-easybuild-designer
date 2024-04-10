@@ -58,7 +58,7 @@ function onChange(option) {
                 <div class="h-1 bg-transparent"></div>
                 <ul v-if="open"
                     :style="{'width':width}"
-                    class=" absolute border border-gray-200 bg-white z-50 rounded-md text-sm">
+                    class=" absolute border border-gray-200 bg-white z-50 rounded-md text-sm shadow-xl">
                     <li v-for="(o,idx) in options"
                         :key="idx"
                         :style="selectedStyle(o)"

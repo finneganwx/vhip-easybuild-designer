@@ -1,7 +1,7 @@
 import { createApp } from 'vue'
-import './style.css'
 import App from './App.vue'
 
+import './style.css'
 import "./assets/js/fontawesome";
 
 import { EasyVhip } from 'vhip-easybuild-api';

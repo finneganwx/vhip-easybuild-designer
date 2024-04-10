@@ -9,6 +9,8 @@ import PopupSelect from "../components/PopupSelect.vue";
 import DefaultDialog from "../components/DefaultDialog.vue";
 import AlertDialog from "../components/alert/AlertDialog";
 
+import { Codemirror } from "vue-codemirror";
+
 import images from "../assets/js/custom-elements-image";
 import {
     defaultMainElements,
@@ -138,6 +140,8 @@ const moreBtns = ref([
         text: "模板JSON",
         icon: "fa-solid fa-file-code",
         click: function () {
+            const template = proxy.$getTemplateObj(hpt);
+            html.value = JSON.stringify(template, null, 4);
             jsonDialog.value.showDialog();
         },
     },
@@ -242,12 +246,16 @@ function onPaperTypeChange(paperType) {
 
         <!-- 预览 -->
         <DefaultDialog ref="previewDialog">
-            <div id="previewHtml"
-                 v-html="html"></div>
+            <div class="bg-gray-200 border-2 border-gray-300 box-border">
+                <div id="previewHtml"
+                     v-html="html"
+                     class="bg-white"></div>
+            </div>
         </DefaultDialog>
 
         <!-- 模板json弹窗 -->
         <DefaultDialog ref="jsonDialog">
+            <Codemirror v-model="html"></Codemirror>
         </DefaultDialog>
     </div>
 </template>
