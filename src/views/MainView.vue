@@ -8,6 +8,7 @@ import NumberInput from "../components/NumberInput.vue";
 import PopupSelect from "../components/PopupSelect.vue";
 import DefaultDialog from "../components/DefaultDialog.vue";
 import AlertDialog from "../components/alert/AlertDialog";
+import RadioGroup from "../components/RadioGroup.vue";
 
 import { Codemirror } from "vue-codemirror";
 
@@ -17,6 +18,8 @@ import {
     defaultAsstElements,
     customElements,
 } from "../assets/js/index";
+
+import { hiprint } from "vue-plugin-hiprint";
 
 // 系统代理
 const proxy = getCurrentInstance().appContext.config.globalProperties;
@@ -30,6 +33,9 @@ let batchNum = ref(1);
 let scale = ref(100);
 let paperType = ref("A4");
 let code = ref("");
+let templateMode = ref("default");
+
+console.log(hiprint);
 
 // 渲染
 const scaleStr = computed(() => {
@@ -181,8 +187,28 @@ function init() {
 }
 
 function onPaperTypeChange(paperType) {
-    console.log(paperType);
     proxy.$setPaperType(hpt, paperType.value);
+}
+
+function onModeChanged(value) {
+    let template = proxy.$getTemplateObj(hpt);
+    if (value === "tid") {
+        template = hpt.getJsonTid();
+    }
+    code.value = JSON.stringify(template, null, 4);
+}
+
+function onUpdateTemplate() {
+    proxy.$updateTemplate(hpt, JSON.parse(code.value));
+    jsonDialog.value.closeDialog();
+}
+
+function onExportTemplate() {
+    let template = proxy.$getTemplateObj(hpt);
+    if (templateMode === "tid") {
+        template = hpt.getJsonTid();
+    }
+    proxy.$exportTemplateJson(template);
 }
 
 function onAfterDialogClose() {
@@ -267,9 +293,28 @@ function onAfterDialogClose() {
         <DefaultDialog ref="jsonDialog"
                        :title="jsonDialogTitle"
                        width="40vw"
-                       height="90vh"
                        @after-close="onAfterDialogClose">
-            <Codemirror v-model="code"></Codemirror>
+            <div style="height: 80vh;">
+                <RadioGroup v-if="jsonDialogTitle === '模板JSON'"
+                            v-model="templateMode"
+                            :radios="[{text:'默认',value:'default'},{text:'Tid',value:'tid'}]"
+                            @change="onModeChanged"></RadioGroup>
+                <Codemirror v-model="code"
+                            style="height: 95%;"></Codemirror>
+            </div>
+            <template #footer>
+                <div class="flex justify-end gap-4"
+                     v-if="jsonDialogTitle === '模板JSON'">
+                    <FuncButton text="导 出"
+                                icon="fa-solid fa-download"
+                                type="warning"
+                                @click="onExportTemplate"></FuncButton>
+                    <FuncButton text="更 新"
+                                icon="fa-solid fa-rotate"
+                                type="success"
+                                @click="onUpdateTemplate"></FuncButton>
+                </div>
+            </template>
         </DefaultDialog>
     </div>
 </template>

@@ -16,6 +16,7 @@
     "@fortawesome/vue-fontawesome": "^3.0.6",
     "@headlessui/vue": "^1.7.19",
     "@heroicons/vue": "^2.1.3",
+    "codemirror": "^6.0.1",
     "scss": "^0.2.4",
     "vhip-easybuild-api": "^2.0.0",
     "vue": "^3.4.21",
