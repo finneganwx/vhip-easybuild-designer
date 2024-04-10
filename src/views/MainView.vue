@@ -29,6 +29,7 @@ let html = ref("");
 let batchNum = ref(1);
 let scale = ref(100);
 let paperType = ref("A4");
+let code = ref("");
 
 // 渲染
 const scaleStr = computed(() => {
@@ -42,6 +43,7 @@ const paperTypes = ref([
 ]);
 const previewDialog = ref();
 const jsonDialog = ref();
+const jsonDialogTitle = ref("");
 
 // 按钮列表
 const btnList = ref([
@@ -140,8 +142,9 @@ const moreBtns = ref([
         text: "模板JSON",
         icon: "fa-solid fa-file-code",
         click: function () {
+            jsonDialogTitle.value = "模板JSON";
             const template = proxy.$getTemplateObj(hpt);
-            html.value = JSON.stringify(template, null, 4);
+            code.value = JSON.stringify(template, null, 4);
             jsonDialog.value.showDialog();
         },
     },
@@ -149,6 +152,7 @@ const moreBtns = ref([
         text: "数据填充",
         icon: "fa-solid fa-database",
         click: function () {
+            jsonDialogTitle.value = "数据填充";
             jsonDialog.value.showDialog();
         },
     },
@@ -156,6 +160,7 @@ const moreBtns = ref([
         text: "自定义元素提取",
         icon: "fa-solid fa-bolt",
         click: function () {
+            jsonDialogTitle.value = "自定义元素提取";
             jsonDialog.value.showDialog();
         },
     },
@@ -178,6 +183,10 @@ function init() {
 function onPaperTypeChange(paperType) {
     console.log(paperType);
     proxy.$setPaperType(hpt, paperType.value);
+}
+
+function onAfterDialogClose() {
+    code.value = "";
 }
 </script>
 
@@ -245,19 +254,22 @@ function onPaperTypeChange(paperType) {
         </div>
 
         <!-- 预览 -->
-        <DefaultDialog ref="previewDialog">
-            <div class="bg-gray-200 border-2 border-gray-300 box-border">
-                <div class="h-[90vh] overflow-auto">
-                    <div id="previewHtml"
-                         v-html="html"
-                         class="bg-white"></div>
-                </div>
+        <DefaultDialog ref="previewDialog"
+                       title="预览">
+            <div class="bg-gray-200 border-2 border-gray-300 box-border h-[90vh] w-fit overflow-auto">
+                <div id="previewHtml"
+                     v-html="html"
+                     class="bg-white"></div>
             </div>
         </DefaultDialog>
 
         <!-- 模板json弹窗 -->
-        <DefaultDialog ref="jsonDialog">
-            <Codemirror v-model="html"></Codemirror>
+        <DefaultDialog ref="jsonDialog"
+                       :title="jsonDialogTitle"
+                       width="40vw"
+                       height="90vh"
+                       @after-close="onAfterDialogClose">
+            <Codemirror v-model="code"></Codemirror>
         </DefaultDialog>
     </div>
 </template>

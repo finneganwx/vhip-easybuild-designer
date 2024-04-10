@@ -21,13 +21,17 @@ const props = defineProps({
     },
 });
 
+const emits = defineEmits(["before-open", "after-close"]);
+
 const dialog = ref();
 const showDialog = () => {
+    emits("before-open");
     dialog.value.showModal();
 };
 
 const closeDialog = () => {
     dialog.value.close();
+    emits("after-close");
 };
 
 defineExpose({
