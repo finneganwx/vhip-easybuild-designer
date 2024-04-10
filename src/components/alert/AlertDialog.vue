@@ -47,6 +47,7 @@ function onConfirm() {
     <DefaultDialog ref="alertDialog"
                    :title="title"
                    width="18vw"
+                   hight="10vh"
                    :showClose="showClose">
         <p class="mx-1 mt-1 mb-4"
            v-html="message"></p>

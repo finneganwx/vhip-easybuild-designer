@@ -1,7 +1,6 @@
 <script setup>
 import { ref } from "vue";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
-import { height } from "@fortawesome/free-brands-svg-icons/fa42Group";
 
 const props = defineProps({
     title: {
@@ -10,11 +9,11 @@ const props = defineProps({
     },
     width: {
         type: String,
-        default: "40vw",
+        default: "fit-content",
     },
     height: {
         type: String,
-        default: "90vh",
+        default: "fit-content",
     },
     showClose: {
         type: Boolean,
@@ -39,8 +38,8 @@ defineExpose({
 
 <template>
     <dialog ref="dialog"
-            class="rounded overflow-hidden box-content min-w-fit"
-            style="max-width: 10vw;">
+            class="rounded overflow-y-hidden overflow-auto box-content max-w-full max-h-full"
+            :style="{ 'height': height, 'width': width}">
         <!-- title -->
         <div class="flex justify-start items-center pt-4 pb-2.5 px-4">
             <div class=" font-semibold font-sans">{{ title }}</div>
@@ -51,7 +50,7 @@ defineExpose({
         </div>
 
         <!-- body -->
-        <div class="max-h-[80vh] overflow-y-auto bg-transparent px-4 py-1">
+        <div class="bg-transparent px-4 py-1">
             <slot>
                 <div>Dialog Content</div>
             </slot>

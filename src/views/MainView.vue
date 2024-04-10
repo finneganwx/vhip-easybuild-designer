@@ -247,9 +247,11 @@ function onPaperTypeChange(paperType) {
         <!-- 预览 -->
         <DefaultDialog ref="previewDialog">
             <div class="bg-gray-200 border-2 border-gray-300 box-border">
-                <div id="previewHtml"
-                     v-html="html"
-                     class="bg-white"></div>
+                <div class="h-[90vh] overflow-auto">
+                    <div id="previewHtml"
+                         v-html="html"
+                         class="bg-white"></div>
+                </div>
             </div>
         </DefaultDialog>
 
