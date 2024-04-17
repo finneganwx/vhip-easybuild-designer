@@ -12,14 +12,13 @@ import RadioGroup from "../components/RadioGroup.vue";
 
 import { Codemirror } from "vue-codemirror";
 
-import images from "../assets/js/custom-elements-image";
+import images from "../assets/js/custom-povider-elements";
+
 import {
     defaultMainElements,
     defaultAsstElements,
     customElements,
-} from "../assets/js/index";
-
-import { hiprint } from "vue-plugin-hiprint";
+} from "../assets/js/draggable-elements";
 
 // 系统代理
 const proxy = getCurrentInstance().appContext.config.globalProperties;
@@ -29,7 +28,7 @@ console.log(proxy);
 let hpt = reactive({});
 let printData = reactive({
     mySignSrc:
-        "https://img-prod-cms-rt-microsoft-com.akamaized.net/cms/api/am/imageFileData/RE4wppH?ver=709e",
+        "https://raw.githubusercontent.com/finneganwx/infinite-space/main/docs/assets/signature.png",
 });
 let html = ref("");
 let batchNum = ref(1);
@@ -37,8 +36,6 @@ let scale = ref(100);
 let paperType = ref("A4");
 let code = ref("");
 let templateMode = ref("default");
-
-console.log(hiprint);
 
 // 渲染
 const scaleStr = computed(() => {
@@ -184,9 +181,7 @@ function init() {
     const group = proxy.$createElemsGroup("自定义图片元素", images);
     const provider = proxy.$createProvider("customElementsProvider", group);
     proxy.$initProviders(provider);
-    // proxy.$buildElemsByHtml();
-    // proxy.$buildElemsByUlist("defaultModule", "#ulist-box");s
-    proxy.$buildElemsByUlist("customElementsProvider", "#ulist-box");
+    proxy.$buildElemsByHtml();
     hpt = proxy.$createCoreObj({
         settingContainer: "#setting-box",
     });
@@ -247,7 +242,6 @@ function onAfterDialogClose() {
             <!-- Elements Box -->
             <div class="col-span-2">
                 <div>
-                    <div id="ulist-box"></div>
                     <ElementCard v-for="(el,idx) in defaultMainElements"
                                  :key="idx"
                                  :tid="el.tid"

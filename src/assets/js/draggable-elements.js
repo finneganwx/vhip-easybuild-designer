@@ -103,11 +103,11 @@ const defaultAsstElements = [
 const customElements = [
     {
         tid: "custom.mySign",
-        title: "我的签名",
+        title: "自定义元素：签名",
         icon: "fa-solid fa-signature",
         iconColor: "#FFB02E",
         iconBgColor: "#FFE55F",
-        image: "/src/assets/images/signature.png",
+        image: "assets/images/signature.png",
     }
 ]
 
