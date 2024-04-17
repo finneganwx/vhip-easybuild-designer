@@ -3,6 +3,8 @@ import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
 import { ref } from "vue";
 
+import { getAssetsFile } from "../assets/js/util";
+
 const props = defineProps({
     tid: {
         type: String,
@@ -48,7 +50,7 @@ const thumb = ref(true);
         <Transition>
             <div v-if="!thumb">
                 <div class="ml-2 mt-1 text-sm font-semibold">{{ title }}</div>
-                <img :src='image'
+                <img :src="image"
                      style="object-fit: contain;"
                      class="w-36">
             </div>

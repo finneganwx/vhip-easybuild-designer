@@ -5,7 +5,7 @@ const defaultMainElements = [
         icon: "fa-solid fa-font",
         iconColor: "#FECACA",
         iconBgColor: "#FF7281",
-        image: "/src/assets/images/text.png",
+        image: "assets/images/text.png",
     },
     {
         tid: "defaultModule.image",
@@ -13,7 +13,7 @@ const defaultMainElements = [
         icon: "fa-solid fa-image",
         iconColor: "#FECACA",
         iconBgColor: "#FF7281",
-        image: "/src/assets/images/img.png",
+        image: "assets/images/img.png",
     },
     {
         tid: "defaultModule.longText",
@@ -21,7 +21,7 @@ const defaultMainElements = [
         icon: "fa-solid fa-align-left",
         iconColor: "#FECACA",
         iconBgColor: "#FF7281",
-        image: "/src/assets/images/longText.png",
+        image: "assets/images/longText.png",
     },
     {
         tid: "defaultModule.table",
@@ -29,7 +29,7 @@ const defaultMainElements = [
         icon: "fa-solid fa-table",
         iconColor: "#FECACA",
         iconBgColor: "#FF7281",
-        image: "/src/assets/images/table.png",
+        image: "assets/images/table.png",
     },
     {
         tid: "defaultModule.emptyTable",
@@ -37,7 +37,7 @@ const defaultMainElements = [
         icon: "fa-solid fa-table-cells-large",
         iconColor: "#FECACA",
         iconBgColor: "#FF7281",
-        image: "/src/assets/images/emptyTable.png",
+        image: "assets/images/emptyTable.png",
     },
     {
         tid: "defaultModule.html",
@@ -45,7 +45,7 @@ const defaultMainElements = [
         icon: "fa-solid fa-code",
         iconColor: "#FECACA",
         iconBgColor: "#FF7281",
-        image: "/src/assets/images/html.png",
+        image: "assets/images/html.png",
     }
 ]
 
@@ -56,7 +56,7 @@ const defaultAsstElements = [
         icon: "fa-solid fa-grip-lines",
         iconColor: "#83CBFF",
         iconBgColor: "#E7F4FF",
-        image: "/src/assets/images/hline.png",
+        image: "assets/images/hline.png",
     },
     {
         tid: "defaultModule.vline",
@@ -64,7 +64,7 @@ const defaultAsstElements = [
         icon: "fa-solid fa-grip-lines-vertical",
         iconColor: "#83CBFF",
         iconBgColor: "#E7F4FF",
-        image: "/src/assets/images/vline.png",
+        image: "assets/images/vline.png",
     },
     {
         tid: "defaultModule.rect",
@@ -72,7 +72,7 @@ const defaultAsstElements = [
         icon: "fa-solid fa-square",
         iconColor: "#83CBFF",
         iconBgColor: "#E7F4FF",
-        image: "/src/assets/images/rect.png",
+        image: "assets/images/rect.png",
     },
     {
         tid: "defaultModule.oval",
@@ -80,7 +80,7 @@ const defaultAsstElements = [
         icon: "fa-solid fa-circle",
         iconColor: "#83CBFF",
         iconBgColor: "#E7F4FF",
-        image: "/src/assets/images/oval.png",
+        image: "assets/images/oval.png",
     },
     {
         tid: "defaultModule.qrcode",
@@ -88,7 +88,7 @@ const defaultAsstElements = [
         icon: "fa-solid fa-qrcode",
         iconColor: "#83CBFF",
         iconBgColor: "#E7F4FF",
-        image: "/src/assets/images/qrcode.png",
+        image: "assets/images/qrcode.png",
     },
     {
         tid: "defaultModule.barcode",
@@ -96,7 +96,7 @@ const defaultAsstElements = [
         icon: "fa-solid fa-barcode",
         iconColor: "#83CBFF",
         iconBgColor: "#E7F4FF",
-        image: "/src/assets/images/barcode.png",
+        image: "assets/images/barcode.png",
     }
 ]
 

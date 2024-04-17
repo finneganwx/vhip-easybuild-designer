@@ -187,7 +187,9 @@ function init() {
     // proxy.$buildElemsByHtml();
     // proxy.$buildElemsByUlist("defaultModule", "#ulist-box");s
     proxy.$buildElemsByUlist("customElementsProvider", "#ulist-box");
-    hpt = proxy.$createCoreObj({ settingContainer: "#setting-box" });
+    hpt = proxy.$createCoreObj({
+        settingContainer: "#setting-box",
+    });
     proxy.$design(hpt, "#canvas-box");
 }
 
