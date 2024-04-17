@@ -27,7 +27,10 @@ console.log(proxy);
 
 // 打印
 let hpt = reactive({});
-let printData = reactive({});
+let printData = reactive({
+    mySignSrc:
+        "https://img-prod-cms-rt-microsoft-com.akamaized.net/cms/api/am/imageFileData/RE4wppH?ver=709e",
+});
 let html = ref("");
 let batchNum = ref(1);
 let scale = ref(100);
@@ -181,7 +184,9 @@ function init() {
     const group = proxy.$createElemsGroup("自定义图片元素", images);
     const provider = proxy.$createProvider("customElementsProvider", group);
     proxy.$initProviders(provider);
-    proxy.$buildElemsByHtml();
+    // proxy.$buildElemsByHtml();
+    // proxy.$buildElemsByUlist("defaultModule", "#ulist-box");s
+    proxy.$buildElemsByUlist("customElementsProvider", "#ulist-box");
     hpt = proxy.$createCoreObj({ settingContainer: "#setting-box" });
     proxy.$design(hpt, "#canvas-box");
 }
@@ -240,6 +245,7 @@ function onAfterDialogClose() {
             <!-- Elements Box -->
             <div class="col-span-2">
                 <div>
+                    <div id="ulist-box"></div>
                     <ElementCard v-for="(el,idx) in defaultMainElements"
                                  :key="idx"
                                  :tid="el.tid"

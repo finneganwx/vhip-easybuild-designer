@@ -1,6 +1,4 @@
 <script setup>
-import { defineModel } from "vue";
-
 const [model, modifiers] = defineModel({
     set(v) {
         if (modifiers.number) {

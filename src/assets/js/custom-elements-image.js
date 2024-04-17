@@ -1,8 +1,11 @@
+const prefix = 'custom';
+
 const images = [
     {
-        "tid": 'custom.mySign',
+        "tid": `${prefix}.mySign`,
         "text": '我的签名',
         "title": '我的签名',
+        "field": 'mySignSrc',
         "type": 'image',
         "options": {
             "height": 30,
