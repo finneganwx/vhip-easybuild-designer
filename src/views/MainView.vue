@@ -159,6 +159,7 @@ const moreBtns = ref([
         icon: "fa-solid fa-database",
         click: function () {
             jsonDialogTitle.value = "数据填充";
+            code.value = JSON.stringify(printData, null, 4);
             jsonDialog.value.showDialog();
         },
     },
@@ -202,6 +203,11 @@ function onModeChanged(value) {
 
 function onUpdateTemplate() {
     proxy.$updateTemplate(hpt, JSON.parse(code.value));
+    jsonDialog.value.closeDialog();
+}
+
+function onSavePrintData() {
+    printData = JSON.parse(code.value);
     jsonDialog.value.closeDialog();
 }
 
@@ -302,7 +308,7 @@ function onAfterDialogClose() {
                             :radios="[{text:'默认',value:'default'},{text:'Tid',value:'tid'}]"
                             @change="onModeChanged"></RadioGroup>
                 <Codemirror v-model="code"
-                            style="height: 95%;"></Codemirror>
+                            style="height: 95%; font-size: 1.2rem;"></Codemirror>
             </div>
             <template #footer>
                 <div class="flex justify-end gap-4"
@@ -315,6 +321,13 @@ function onAfterDialogClose() {
                                 icon="fa-solid fa-rotate"
                                 type="success"
                                 @click="onUpdateTemplate"></FuncButton>
+                </div>
+                <div class="flex justify-end gap-4"
+                     v-if="jsonDialogTitle === '数据填充'">
+                    <FuncButton text="保 存"
+                                icon="fa-solid fa-rotate"
+                                type="success"
+                                @click="onSavePrintData"></FuncButton>
                 </div>
             </template>
         </DefaultDialog>
